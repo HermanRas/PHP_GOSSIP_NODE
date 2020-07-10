@@ -4,6 +4,11 @@ A PHP Project for running a Gossip protocol to sync gossip "DATA" across an shar
 ![Gossip Protocol](https://raw.githubusercontent.com/HermanRas/PHP_GOSSIP_NODE/master/img/GossipProtocol.png)
 The protocol has no single point of failure like Centralized networks and removes the data overheads caused by a Fully connected network by only fetching missing data based on a shared ledger.
 
+- A node in the network randomly selects a peer with which it will exchange some information.
+- A data exchange process happens between these peers.
+Each node processes the data it received.
+- These steps are periodically repeated by the nodes in the network as a way to disseminate information.
+
 "PHP GOSSIP NODE" Based on [Gossip_protocol](https://en.wikipedia.org/wiki/Gossip_protocol) and 
 [Eventual_consistency](https://en.wikipedia.org/wiki/Eventual_consistency) of data.
 
@@ -12,14 +17,14 @@ The protocol has no single point of failure like Centralized networks and remove
 
 - [PHP GOSSIP NODE](#php-gossip-node)
 	- [Gossip Node Quick Start](#gossip-node-quick-start)
-	- [## Gossip Node Details](#h2-idgossip-node-details-438gossip-node-detailsh2)
+	- [Gossip Node Details](#gossip-node-details)
 		- [Node Properties](#node-properties)
-	- [- GOSSIP_MAX_PEER_COUNT](#ulligossip_max_peer_countliul)
 		- [DATA_SETS](#data_sets)
 	- [GOSSIP_PROTOCOL](#gossip_protocol)
 	- [Node Build](#node-build)
-		- [Command line CLIENT / SERVER](#command-line-client--server)
-		- [WEB CLEINT / SERVER](#web-cleint--server)
+		- [CLI CLIENT / SERVER](#cli-client--server)
+		- [WEB CLIENT / SERVER](#web-client--server)
+	- [To Do](#to-do)
 
 
 ## Gossip Node Quick Start
@@ -28,9 +33,10 @@ The protocol has no single point of failure like Centralized networks and remove
 3. The receiving node will call back after the property gossip_timer time ran out.
 4. As Part of the call back the remote node will do a HELLO_FUNCTION and DID_YOU_HERE function.
 5. the now registered node will loop thru its gossip list, and complete a TELL_ME_MORE_FUNCTION to reach state of consistency 
-6. the now registered node will call all other nodes after the property gossip_timer ran out, sending do a HELLO_FUNCTION and DID_YOU_HERE function to all the discovered nodes creating an infinite update & discover loop.
+6. the now registered node will call 5 random other nodes after the property gossip_timer ran out, sending do a HELLO_FUNCTION and DID_YOU_HERE function to the 5 selected nodes creating an infinite update & discover loop.
 
 ## Gossip Node Details
+
 ---
 ### Node Properties
 - NODE_GUID
@@ -41,6 +47,7 @@ The protocol has no single point of failure like Centralized networks and remove
 - PORT
 - GOSSIP_TIMER
 - GOSSIP_MAX_PEER_COUNT
+  
 ---
 ### DATA_SETS
 - PEER_NODE_LIST
@@ -49,7 +56,12 @@ The protocol has no single point of failure like Centralized networks and remove
 	- IP
 	- PORT
 	- NETWORK_NAME
-
+	- PEER_MAX
+		- 5 default peers to gossip too.
+	- PEER_SELECT_TYPE
+		- random peers (used for data distribution)
+		- oldest first (used as a down detector)
+		- 
 - GOSSIP
 	- GUID
 	- DATE_TIME
@@ -75,7 +87,7 @@ The protocol has no single point of failure like Centralized networks and remove
 	- Show all GOSSIP and include SHA2 if data complete
 ---
 ## Node Build
-### Command line CLIENT / SERVER
+### CLI CLIENT / SERVER
 - CLEINT:
 	```
 	- CREATE_GOSSIP
@@ -96,7 +108,7 @@ The protocol has no single point of failure like Centralized networks and remove
 	SERVER_FILES_FUNCTION
 	```
 	
-### WEB CLEINT / SERVER
+### WEB CLIENT / SERVER
 - CLIENT
 	```
 	- CREATE_GOSSIP
@@ -116,5 +128,7 @@ The protocol has no single point of failure like Centralized networks and remove
 	```
 ---
 
-
-
+## To Do
+- add version control to protocol before gossip
+- consider adding a can reach property to Node list based on last update
+- consider adding a link from origen on MSG, so MSG's from origen can be removed with the node if a timeout has reached
