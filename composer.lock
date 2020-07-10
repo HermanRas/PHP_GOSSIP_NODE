@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "69f404430159695158911da25fa62305",
+    "content-hash": "101fa83d9813cfeffab5d1a83bd9dbfd",
     "packages": [
         {
             "name": "composer/installers",
@@ -132,49 +132,6 @@
                 "zikula"
             ],
             "time": "2020-04-07T06:57:05+00:00"
-        },
-        {
-            "name": "donatj/cli-toolkit",
-            "version": "v0.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/donatj/CLI-Toolkit.git",
-                "reference": "e612c954fdc5a3a2410402f90a53fcfa5ce850d7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/donatj/CLI-Toolkit/zipball/e612c954fdc5a3a2410402f90a53fcfa5ce850d7",
-                "reference": "e612c954fdc5a3a2410402f90a53fcfa5ce850d7",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "CLI": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jesse G. Donat",
-                    "email": "donatj@gmail.com",
-                    "homepage": "http://donatstudios.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Simple PHP CLI Toolkit",
-            "homepage": "https://github.com/donatj/CLI-Toolkit",
-            "keywords": [
-                "CLI-Toolkit",
-                "cli"
-            ],
-            "time": "2017-05-15T15:51:37+00:00"
         },
         {
             "name": "sallar/5257396",
