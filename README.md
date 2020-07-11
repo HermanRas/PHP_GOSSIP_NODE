@@ -47,6 +47,9 @@ Each node processes the data it received.
 - PORT
 - GOSSIP_TIMER
 - GOSSIP_MAX_PEER_COUNT
+- PEER_SELECT_TYPE
+  - random peers (used for data distribution)
+  - oldest first (used as a down detector)
   
 ---
 ### DATA_SETS
@@ -56,12 +59,8 @@ Each node processes the data it received.
 	- IP
 	- PORT
 	- NETWORK_NAME
-	- PEER_MAX
-		- 5 default peers to gossip too.
-	- PEER_SELECT_TYPE
-		- random peers (used for data distribution)
-		- oldest first (used as a down detector)
-		- 
+	- LAST_UPDATE
+
 - GOSSIP
 	- GUID
 	- DATE_TIME
@@ -78,9 +77,9 @@ Each node processes the data it received.
 - HELLO_FUNCTION
 	- loop thru peer list sending all known NODEs & NETWORK_NAMEs without passwords
 - DID_YOU_HERE
-	- loop thru peer list for my networks sending all GOSSIP_GUIDs
+	- loop thru peer list for my networks sending all GOSSIP_GUID
 - TELL_ME_MORE_FUNCTION
-	- loop thru received GOSSIP_GUIDs, retrieving all data for from node that shared it using NODE_GUID
+	- loop thru received GOSSIP_GUID, retrieving all data for from node that shared it using NODE_GUID
 - NETWORK_STATUS_FUNCTION
 	- Show all NODES on this NETWORK_NAME that this nodes knows
 - GOSSIP_STATUS_FUNCTION
@@ -88,43 +87,41 @@ Each node processes the data it received.
 ---
 ## Node Build
 ### CLI CLIENT / SERVER
-- CLEINT:
+- CLIENT:
 	```
 	- CREATE_GOSSIP
-	- REGISTER_FUNCTION
+	- GET_GOSSIP
 	- NETWORK_STATUS_FUNCTION
 	- GOSSIP_STATUS_FUNCTION
 	```
 
--  SERVER_NODE LOOP:
+-  PROCESSOR:
 	```
-	- HELLO_FUNCTION
-	- DID_YOU_HERE
-	- TELL_ME_MORE_FUNCTION
+	- CREATE_SERVER_FUNCTION
+	- REGISTER_FUNCTION
+	- START_PROCESS
+		- HELLO_FUNCTION
+		- DID_YOU_HERE_FUNCTION
+		- TELL_ME_MORE_FUNCTION
 	```
-	
-- CREATE
-	```
-	SERVER_FILES_FUNCTION
-	```
-	
+
 ### WEB CLIENT / SERVER
 - CLIENT
 	```
 	- CREATE_GOSSIP
-	- REGISTER_FUNCTION
+	- GET_GOSSIP
 	- NETWORK_STATUS_FUNCTION
 	- GOSSIP_STATUS_FUNCTION
 	```
 	
 - SERVER
 	```
-	- RECIEVE_NETWORK_STATUS
-	- RECIEVE_GOSSIP_STATUS
+	- RECEIVE_NETWORK_STATUS
+	- RECEIVE_GOSSIP_STATUS
 	- RECEIVE_REGISTER
 	- RECEIVE_HELLO
 	- RECEIVE_DID_YOU_HERE
-	- RECIEVE_TELL_ME_MORE
+	- RECEIVE_TELL_ME_MORE
 	```
 ---
 
