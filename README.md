@@ -128,5 +128,7 @@ Each node processes the data it received.
 ## To Do
 - add version control to network auth before gossip
 - add network auth function
-- consider adding a can reach property to Node list based on last update
-- consider adding a link from origen on MSG, so MSG's from origen can be removed with the node if a timeout has reached
+- consider adding a can reach property to Node list based on last update with max fail to protect against dead node traffic lock/spam
+- on processor::register validate server.json
+- on server::start validate server.json
+- add server::start with params ignore json
